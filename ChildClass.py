@@ -25,18 +25,17 @@ class Client(BaseClass.BaseClient):
             exit()
         return id
 
-    def def_age(self, date):
+    def def_age(self, str_date):
         try:
-            str_date = date.split('.')
-            year = int(str_date[2])
+            bdate = datetime.strptime(str_date, '%d.%m.%Y')
         except: return None
-        day = int(str_date[0])
-        month = int(str_date[1])
-        day_now = (datetime.now().day)
+
+        day_now = datetime.now().day
         month_now = datetime.now().month
         year_now = datetime.now().year
-        age = year_now - year
-        if ((month == month_now and day > day_now) or month > month_now):
+
+        age = year_now - bdate.year
+        if (bdate.month == month_now and bdate.day > day_now) or bdate.month > month_now:
             age -= 1
         return age
 
